@@ -2,6 +2,7 @@ const path = require("path");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 let mode = 'production';
 let mode_index = 0;
@@ -44,7 +45,21 @@ module.exports = {
           {
             loader: "css-loader",
             options: {
+              modules: true,
               importLoaders: 1
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(gif|png|jpe?g|eot|woff2?|ttf|svg|pdf)$/,
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              name: '[name]_[sha512:hash:base64:7].[ext]',
+              limit: 1024 * 30,
+              fallback: "file-loader"
             }
           }
         ]
@@ -63,7 +78,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: "An example of webpack 4 & react",
       filename: "index.html"
-    })
+    }),
+    new CopyPlugin([
+      { from: './public' },
+    ])
   ],
   devtool: isDev ? 'source-map' : undefined,
   watch: isDev ? true : false,

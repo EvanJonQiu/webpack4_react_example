@@ -62,3 +62,7 @@
   ```
   npm install --save-dev url-loader
   ```
+18. install copy-webpack-plugin
+  ```
+  npm install --save-dev copy-webpack-plugin
+  ```

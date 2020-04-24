@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-require("./main.css");
+import MainLayout from './components/MainLayout';
+import "./main.css";
+import 'semantic-ui-css/semantic.min.css';
 
 ReactDOM.render(
-  <div>hello</div>,
+  <MainLayout/>,
   document.getElementById("app")
 );
